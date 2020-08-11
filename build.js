@@ -37,6 +37,7 @@ async function main() {
         await client.login(process.env.DISCORD_BOT_TOKEN);
     } catch (e) {
         console.log(e);
+        process.exit(1);
     }
     client.destroy();
 }
