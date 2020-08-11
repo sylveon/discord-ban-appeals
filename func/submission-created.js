@@ -3,7 +3,25 @@ const fetch = require("node-fetch");
 const { decodeJwt } = require("./helpers/jwt-helpers.js");
 
 exports.handler = async function (event, context) {
-    const payload = JSON.parse(event.body).payload.data;
+    let payload;
+
+    if (process.env.USE_NETLIFY_FORMS) {
+        payload = JSON.parse(event.body).payload.data;
+    } else {
+        if (event.httpMethod !== "POST") {
+            return {
+                statusCode: 405
+            };
+        }
+
+        const params = new URLSearchParams(event.body);
+        payload = {
+            banReason = params.get("banReason") || undefined,
+            appealText = params.get("appealText") || undefined,
+            futureActions = params.get("futureActions") || undefined,
+            token = params.get("token") || undefined
+        };
+    }
 
     if (payload.banReason !== undefined &&
         payload.appealText !== undefined &&
@@ -42,9 +60,18 @@ exports.handler = async function (event, context) {
         });
 
         if (result.ok) {
-            return {
-                statusCode: 200
-            };
+            if (process.env.USE_NETLIFY_FORMS) {
+                return {
+                    statusCode: 200
+                };
+            } else {
+                return {
+                    statusCode: 303,
+                    headers: {
+                        "Location": "/success"
+                    }
+                };
+            }
         } else {
             throw new Error("Failed to submit webhook");
         }
