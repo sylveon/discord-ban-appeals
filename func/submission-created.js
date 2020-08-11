@@ -57,7 +57,7 @@ exports.handler = async function (event, context) {
 
             embedFields.push({
                 name: "Actions",
-                value: `[Approve appeal and unban user](${unbanUrl.toString()}?token=${encodeURIComponent(createJwt(unbanInfo, undefined))})`
+                value: `[Approve appeal and unban user](${unbanUrl.toString()}?token=${encodeURIComponent(createJwt(unbanInfo))})`
             });
         }
 

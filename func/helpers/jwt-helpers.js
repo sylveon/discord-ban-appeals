@@ -1,10 +1,15 @@
 const jwt = require("jsonwebtoken");
 
-function createJwt(data, durationInSeconds) {
-    return jwt.sign(data, process.env.JWT_SECRET, {
-        expiresIn: durationInSeconds,
+function createJwt(data, duration) {
+    const options = {
         issuer: 'ban-appeals-backend'
-    });
+    };
+
+    if (duration) {
+        options.expiresIn = duration;
+    }
+
+    return jwt.sign(data, process.env.JWT_SECRET, options);
 }
 
 function decodeJwt(token) {
