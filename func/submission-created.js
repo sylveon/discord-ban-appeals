@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const { API_ENDPOINT } = require("./discord-helpers.js");
+const { API_ENDPOINT } = require("./helpers/discord-helpers.js");
 const { decodeJwt } = require("./helpers/jwt-helpers.js");
 
 exports.handler = async function (event, context) {
