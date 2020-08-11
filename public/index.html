@@ -16,13 +16,7 @@
         </div>
 
         <div class="flex-fill text-center d-flex h-100 justify-content-center align-items-center">
-            <button class="btn" id="login-button" style="font-size: 3rem;">Login with Discord</button>
+            <a class="btn" style="font-size: 2rem;" href="/.netlify/functions/oauth">Login with Discord</a>
         </div>
-
-        <script>
-            document.getElementById("login-button").onclick = e => {
-                window.location.href = "/.netlify/functions/oauth";
-            };
-        </script>
     </body>
 </html>

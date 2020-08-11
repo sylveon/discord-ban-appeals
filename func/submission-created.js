@@ -3,23 +3,19 @@ const fetch = require("node-fetch");
 const { decodeJwt } = require("./helpers/jwt-helpers.js");
 
 exports.handler = async function (event, context) {
-    if (event.httpMethod !== "GET") {
-        return {
-            statusCode: 405
-        };
-    }
+    const payload = JSON.parse(event.body).payload.data;
 
-    if (event.queryStringParameters.banReason !== undefined &&
-        event.queryStringParameters.appealText !== undefined &&
-        event.queryStringParameters.futureActions !== undefined && 
-        event.queryStringParameters.token !== undefined) {
+    if (payload.banReason !== undefined &&
+        payload.appealText !== undefined &&
+        payload.futureActions !== undefined && 
+        payload.token !== undefined) {
         
-        const userInfo = decodeJwt(event.queryStringParameters.token);
+        const userInfo = decodeJwt(payload.token);
 
         const result = await fetch(process.env.APPEALS_WEBHOOK, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json;charset=utf-8"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 embeds: [{
@@ -31,15 +27,15 @@ exports.handler = async function (event, context) {
                     },
                     {
                         name: "Why where you banned?",
-                        value: event.queryStringParameters.banReason
+                        value: payload.banReason
                     },
                     {
                         name: "Why do you feel you should be unbanned?",
-                        value: event.queryStringParameters.appealText
+                        value: payload.appealText
                     },
                     {
                         name: "What will you do to avoid being banned in the future?",
-                        value: event.queryStringParameters.futureActions
+                        value: payload.futureActions
                     }]
                 }]
             })
@@ -47,10 +43,7 @@ exports.handler = async function (event, context) {
 
         if (result.ok) {
             return {
-                statusCode: 303,
-                headers: {
-                    "Location": `/success.html?msg=${encodeURIComponent("Your appeal has been submitted!")}`
-                }
+                statusCode: 200
             };
         } else {
             throw new Error("Failed to submit webhook");
