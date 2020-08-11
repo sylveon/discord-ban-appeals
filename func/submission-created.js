@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 const { API_ENDPOINT } = require("./helpers/discord-helpers.js");
-const { decodeJwt } = require("./helpers/jwt-helpers.js");
+const { createJwt, decodeJwt } = require("./helpers/jwt-helpers.js");
 
 exports.handler = async function (event, context) {
     let payload;
@@ -30,6 +30,37 @@ exports.handler = async function (event, context) {
         payload.token !== undefined) {
         
         const userInfo = decodeJwt(payload.token);
+        const embedFields = [
+            {
+                name: "Submitter",
+                value: `<@${userInfo.id}> (${userInfo.username}#${userInfo.discriminator})`
+            },
+            {
+                name: "Why where you banned?",
+                value: payload.banReason
+            },
+            {
+                name: "Why do you feel you should be unbanned?",
+                value: payload.appealText
+            },
+            {
+                name: "What will you do to avoid being banned in the future?",
+                value: payload.futureActions
+            }
+        ];
+
+        if (process.env.GUILD_ID) {
+            const unbanUrl = new URL("/.netlify/functions/unban", process.env.URL);
+            const unbanInfo = {
+                userId: userInfo.id
+            };
+
+            embedFields.push({
+                name: "Actions",
+                value: `[Approve appeal and unban user](${unbanUrl.toString()}?token=${encodeURIComponent(createJwt(unbanInfo, undefined))})`
+            });
+        }
+
         const result = await fetch(`${API_ENDPOINT}/channels/${encodeURIComponent(process.env.APPEALS_CHANNEL)}/messages`, {
             method: "POST",
             headers: {
@@ -40,22 +71,7 @@ exports.handler = async function (event, context) {
                 embed: {
                     title: "New appeal submitted!",
                     timestamp: new Date().toISOString(),
-                    fields: [{
-                        name: "Submitter",
-                        value: `<@${userInfo.id}> (${userInfo.username}#${userInfo.discriminator})`
-                    },
-                    {
-                        name: "Why where you banned?",
-                        value: payload.banReason
-                    },
-                    {
-                        name: "Why do you feel you should be unbanned?",
-                        value: payload.appealText
-                    },
-                    {
-                        name: "What will you do to avoid being banned in the future?",
-                        value: payload.futureActions
-                    }]
+                    fields: embedFields
                 }
             })
         });
