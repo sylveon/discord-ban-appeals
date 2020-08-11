@@ -17,15 +17,25 @@ async function getUserInfo(token) {
     return await result.json();
 }
 
-async function userIsBanned(userId, guildId, botToken) {
-    const result = await fetch(`${API_ENDPOINT}/guilds/${encodeURIComponent(guildId)}/bans/${encodeURIComponent(userId)}`, {
-        method: "GET",
+function callBanApi(userId, guildId, botToken, method) {
+    return fetch(`${API_ENDPOINT}/guilds/${encodeURIComponent(guildId)}/bans/${encodeURIComponent(userId)}`, {
+        method: method,
         headers: {
             "Authorization": `Bot ${botToken}`
         }
     });
-
-    return result.ok;
 }
 
-module.exports = { getUserInfo, userIsBanned };
+async function userIsBanned(userId, guildId, botToken) {
+    return (await callBanApi(userId, guildId, botToken, "GET")).ok;
+}
+
+async function unbanUser(userId, guildId, botToken) {
+    const result = await callBanApi(userId, guildId, botToken, "DELETE");
+
+    if (!result.ok) {
+        throw new Error("Failed to unban user");    
+    }
+}
+
+module.exports = { getUserInfo, userIsBanned, unbanUser };
