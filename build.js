@@ -5,7 +5,11 @@ const path = require("path");
 async function main() {
     // Make sure the bot connected to the gateway at least once.
     const client = new Discord.Client();
-    await client.login(process.env.DISCORD_BOT_TOKEN);
+    try {
+        await client.login(process.env.DISCORD_BOT_TOKEN);
+    } catch (e) {
+        console.log(e);
+    }
     client.destroy();
 
     if (!process.env.USE_NETLIFY_FORMS) {
