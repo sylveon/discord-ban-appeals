@@ -1,0 +1,59 @@
+body {
+    background: #36393f;
+
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.jumbotron {
+    background: #2f3136;
+}
+
+h1 {
+    color: white;
+}
+
+button {
+    color: white !important;
+    background-color: #7289da !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    transition: background-color .17s ease;
+}
+
+button:hover {
+    background-color: #677bc4 !important;
+}
+
+button:active {
+    background-color: #5b6eae !important;
+}
+
+label {
+    color: #8e9297;
+}
+
+textarea {
+    color: #dcddde !important;
+
+    background: rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid rgba(0, 0, 0, 0.3) !important;
+
+    outline: none !important;
+    box-shadow: none !important;
+
+    transition: border-color .2s ease-in-out;
+    resize: none;
+}
+
+textarea:hover {
+    border-color: #040405 !important;
+}
+
+textarea:focus {
+    border-color: #7289da !important;
+}
+
+#username {
+    color: white;
+}

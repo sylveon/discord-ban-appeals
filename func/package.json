@@ -1,0 +1,6 @@
+{
+    "dependencies": {
+        "jsonwebtoken": "^8.5.1",
+        "node-fetch": "^2.6.0"
+    }
+}

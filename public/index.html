@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html  class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+
+        <title>Ban appeal</title>
+    </head>
+    <body lang="en" class="h-100 d-flex flex-column justify-content-center align-items-stretch">
+        <div class="jumbotron text-center mb-0">
+            <h1>Ban appeal</h1>
+        </div>
+
+        <div class="flex-fill text-center d-flex h-100 justify-content-center align-items-center">
+            <button class="btn" id="login-button" style="font-size: 3rem;">Login with Discord</button>
+        </div>
+
+        <script>
+            document.getElementById("login-button").onclick = e => {
+                window.location.href = "/.netlify/functions/oauth";
+            };
+        </script>
+    </body>
+</html>

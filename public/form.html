@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+
+        <title>Ban appeal form</title>
+    </head>
+    <body lang="en">
+        <div class="jumbotron text-center">
+            <h1>Ban appeal form</h1>
+        </div>
+
+        <div class="container">
+            <div class="d-flex">
+                <img id="avatar" class="rounded-circle" width="64" height="64">
+                <h2 id="username" class="ml-3 mb-0 align-self-center"></h2>
+            </div>
+
+            <form class="mt-3" id="appealForm">
+                <div class="form-group">
+                    <label for="banReason">Why where you banned?</label>
+                    <textarea class="form-control" id="banReason" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="appealText">Why do you feel you should be unbanned?</label>
+                    <textarea class="form-control" id="appealText" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="futureActions">What will you do to avoid being banned in the future?</label>
+                    <textarea class="form-control" id="futureActions" required></textarea>
+                </div>
+                <div class="text-right">
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+
+        <script>
+            function parseJwt(token) {
+                var base64Url = token.split('.')[1];
+                var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+
+                return JSON.parse(jsonPayload);
+            };
+
+            const jwt = new URLSearchParams(document.location.search.substring(1)).get("token");
+
+            const userInfo = parseJwt(jwt);
+
+            const avatar = userInfo.avatar
+                ? `avatars/${encodeURIComponent(userInfo.id)}/${encodeURIComponent(userInfo.avatar)}.webp?size=64`
+                : `embed/avatars/${userInfo.discriminator % 5}.png?size=64`;
+            document.getElementById("avatar").src = `https://cdn.discordapp.com/${avatar}`;
+
+            document.getElementById("username").textContent = `${userInfo.username}#${userInfo.discriminator}`;
+
+            document.getElementById("appealForm").onsubmit = e => {
+                e.preventDefault();
+
+                const banReason = document.getElementById("banReason").value;
+                const appealText = document.getElementById("appealText").value;
+                const futureActions = document.getElementById("futureActions").value;
+
+                window.location.href = `/.netlify/functions/submit-appeal?banReason=${encodeURIComponent(banReason)}&appealText=${encodeURIComponent(appealText)}&futureActions=${encodeURIComponent(futureActions)}&token=${encodeURIComponent(jwt)}`;
+            };
+        </script>
+    </body>
+</html>

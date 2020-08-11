@@ -1,0 +1,13 @@
+[build]
+  publish = "public"
+  functions = "func"
+  command = "cd func && npm i"
+
+[build.environment]
+  AWS_LAMBDA_JS_RUNTIME = "nodejs12.x"
+
+[build.processing]
+  css = { bundle = true, minify = true }
+  js = { bundle = true, minify = true }
+  html = { pretty_urls = true }
+  images = { compress = true }
