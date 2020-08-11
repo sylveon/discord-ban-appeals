@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 
+const { API_ENDPOINT } = require("./discord-helpers.js");
 const { decodeJwt } = require("./helpers/jwt-helpers.js");
 
 exports.handler = async function (event, context) {
@@ -30,10 +31,11 @@ exports.handler = async function (event, context) {
         
         const userInfo = decodeJwt(payload.token);
 
-        const result = await fetch(process.env.APPEALS_WEBHOOK, {
+        const result = await fetch(`${API_ENDPOINT}/channels/${encodeURIComponent(process.env.APPEALS_CHANNEL)}/messages`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`
             },
             body: JSON.stringify({
                 embeds: [{
