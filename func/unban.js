@@ -9,7 +9,7 @@ exports.handler = async function (event, context) {
     }
 
     if (event.queryStringParameters.token !== undefined) {
-        const unbanInfo = decodeJwt(token);
+        const unbanInfo = decodeJwt(event.queryStringParameters.token);
         if (unbanInfo.userId !== undefined) {
             try {
                 await unbanUser(unbanInfo.userId, process.env.GUILD_ID, process.env.DISCORD_BOT_TOKEN);
