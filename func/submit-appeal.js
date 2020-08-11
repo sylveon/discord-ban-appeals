@@ -1,6 +1,5 @@
 const fetch = require("node-fetch");
 
-const config = require("./helpers/config.js");
 const { decodeJwt } = require("./helpers/jwt-helpers.js");
 
 exports.handler = async function (event, context) {
@@ -17,7 +16,7 @@ exports.handler = async function (event, context) {
         
         const userInfo = decodeJwt(event.queryStringParameters.token);
 
-        const result = await fetch(config.APPEALS_WEBHOOK, {
+        const result = await fetch(process.env.APPEALS_WEBHOOK, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8"
