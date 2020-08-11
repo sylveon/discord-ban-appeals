@@ -30,21 +30,27 @@ exports.handler = async function (event, context) {
         const data = await result.json();
 
         const user = await getUserInfo(data.access_token);
-        if (process.env.DISCORD_BOT_TOKEN) {
+        if (process.env.GUILD_ID) {
             if (!await userIsBanned(user.id, process.env.GUILD_ID, process.env.DISCORD_BOT_TOKEN)) {
                 return {
                     statusCode: 303,
                     headers: {
-                        "Location": `/error.html?msg=${encodeURIComponent("It seems like you aren't banned. Try joining the server from a different IP.")}`
+                        "Location": `/error?msg=${encodeURIComponent("It seems like you aren't banned. Try joining the server from a different IP.")}`
                     }
                 };
             }
         }
 
+        const userPublic = {
+            id: user.id,
+            avatar: user.avatar,
+            username: user.username,
+            discriminator: user.discriminator
+        };
         return {
             statusCode: 303,
             headers: {
-                "Location": `/form.html?token=${encodeURIComponent(createJwt(user, data.expires_in))}`
+                "Location": `/form?token=${encodeURIComponent(createJwt(userPublic, data.expires_in))}`
             }
         };
     }

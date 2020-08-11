@@ -12,7 +12,7 @@ h1 {
     color: white;
 }
 
-button {
+button, a.btn {
     color: white !important;
     background-color: #7289da !important;
     border: none !important;
@@ -21,11 +21,11 @@ button {
     transition: background-color .17s ease;
 }
 
-button:hover {
+button:hover, a.btn:hover {
     background-color: #677bc4 !important;
 }
 
-button:active {
+button:active, a.btn:active {
     background-color: #5b6eae !important;
 }
 
