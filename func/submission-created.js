@@ -38,7 +38,7 @@ exports.handler = async function (event, context) {
                 "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`
             },
             body: JSON.stringify({
-                embeds: [{
+                embed: {
                     title: "New appeal submitted!",
                     timestamp: new Date().toISOString(),
                     fields: [{
@@ -57,7 +57,7 @@ exports.handler = async function (event, context) {
                         name: "What will you do to avoid being banned in the future?",
                         value: payload.futureActions
                     }]
-                }]
+                }
             })
         });
 
@@ -75,7 +75,7 @@ exports.handler = async function (event, context) {
                 };
             }
         } else {
-            throw new Error("Failed to submit webhook");
+            throw new Error("Failed to submit message");
         }
     }
 
