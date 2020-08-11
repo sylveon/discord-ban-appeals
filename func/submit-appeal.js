@@ -4,9 +4,9 @@ const { decodeJwt } = require("./helpers/jwt-helpers.js");
 
 exports.handler = async function (event, context) {
     if (event.httpMethod !== "GET") {
-		return {
-			statusCode: 405
-		};
+        return {
+            statusCode: 405
+        };
     }
 
     if (event.queryStringParameters.banReason !== undefined &&
@@ -59,5 +59,5 @@ exports.handler = async function (event, context) {
 
     return {
         statusCode: 400
-	};
+    };
 }
