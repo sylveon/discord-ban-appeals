@@ -41,10 +41,16 @@ exports.handler = async function (event, context) {
             }
         }
 
+        const userPublic = {
+            id: user.id,
+            avatar: user.avatar,
+            username: user.username,
+            discriminator: user.discriminator
+        };
         return {
             statusCode: 303,
             headers: {
-                "Location": `/form?token=${encodeURIComponent(createJwt(user, data.expires_in))}`
+                "Location": `/form?token=${encodeURIComponent(createJwt(userPublic, data.expires_in))}`
             }
         };
     }
