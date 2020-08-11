@@ -11,10 +11,16 @@
         <title>Error</title>
     </head>
     <body class="d-flex h-100 justify-content-center align-items-center">
-        <h1 id="msg" style="color: #f04747;" class="text-center"></h1>
+        <h1 id="msg" style="color: #f04747;" class="text-center">
+            It seems like you aren't banned<br>
+            Try joining the server from a different IP
+        </h1>
 
         <script>
-            document.getElementById("msg").textContent = new URLSearchParams(document.location.search.substring(1)).get("msg");
+            const msg = new URLSearchParams(document.location.search.substring(1)).get("msg");
+            if (msg) {
+                document.getElementById("msg").innerText = msg;
+            }
         </script>
     </body>
 </html>

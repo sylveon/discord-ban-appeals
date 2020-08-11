@@ -15,5 +15,12 @@
             Your appeal has been submitted!<br>
             Please keep your friend requests open so that a mod may contact you.
         </h1>
+
+        <script>
+            const msg = new URLSearchParams(document.location.search.substring(1)).get("msg");
+            if (msg) {
+                document.getElementById("msg").innerText = msg;
+            }
+        </script>
     </body>
 </html>

@@ -35,7 +35,7 @@ exports.handler = async function (event, context) {
                 return {
                     statusCode: 303,
                     headers: {
-                        "Location": `/error?msg=${encodeURIComponent("It seems like you aren't banned. Try joining the server from a different IP.")}`
+                        "Location": "/error"
                     }
                 };
             }
