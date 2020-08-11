@@ -30,7 +30,7 @@ exports.handler = async function (event, context) {
         const data = await result.json();
 
         const user = await getUserInfo(data.access_token);
-        if (process.env.DISCORD_BOT_TOKEN) {
+        if (process.env.GUILD_ID) {
             if (!await userIsBanned(user.id, process.env.GUILD_ID, process.env.DISCORD_BOT_TOKEN)) {
                 return {
                     statusCode: 303,
