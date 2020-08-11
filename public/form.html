@@ -54,9 +54,9 @@
             const userInfo = parseJwt(jwt);
 
             const avatar = userInfo.avatar
-                ? `avatars/${encodeURIComponent(userInfo.id)}/${encodeURIComponent(userInfo.avatar)}.webp?size=64`
-                : `embed/avatars/${userInfo.discriminator % 5}.png?size=64`;
-            document.getElementById("avatar").src = `https://cdn.discordapp.com/${avatar}`;
+                ? `avatars/${encodeURIComponent(userInfo.id)}/${encodeURIComponent(userInfo.avatar)}.webp`
+                : `embed/avatars/${userInfo.discriminator % 5}.png`;
+            document.getElementById("avatar").src = `https://cdn.discordapp.com/${avatar}?size=256`;
 
             document.getElementById("username").textContent = `${userInfo.username}#${userInfo.discriminator}`;
 
