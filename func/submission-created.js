@@ -16,10 +16,10 @@ exports.handler = async function (event, context) {
 
         const params = new URLSearchParams(event.body);
         payload = {
-            banReason = params.get("banReason") || undefined,
-            appealText = params.get("appealText") || undefined,
-            futureActions = params.get("futureActions") || undefined,
-            token = params.get("token") || undefined
+            banReason: params.get("banReason") || undefined,
+            appealText: params.get("appealText") || undefined,
+            futureActions: params.get("futureActions") || undefined,
+            token: params.get("token") || undefined
         };
     }
 
