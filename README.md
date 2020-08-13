@@ -35,10 +35,12 @@ By using OAuth2, it ensures users can't forge or fake appeals.
 
 8. Click **Change site name** and give it an appropriate name, or [setup a custom domain](https://docs.netlify.com/domains-https/custom-domains/).
 
-9. Go back to the [Discord Developer Portal](https://discord.com/developers/applications), open the dashboard for the application you created in step 1, and click on **OAuth2**.
+9. Click **Deploys**, and then **Trigger deploy**. In the menu that shows up, hit **Deploy site**. This is important so that the new site name is propagated.
 
-10. Click on **Add Redirect** and enter `https://[site-name].netlify.app/.netlify/functions/oauth-callback`, replacing `[site-name]` by the name you picked in step 8 (or the entire Netlify domain by your own domain, if you opted for that).
+10. Go back to the [Discord Developer Portal](https://discord.com/developers/applications), open the dashboard for the application you created in step 1, and click on **OAuth2**.
 
-11. Hit the green **Save Changes** button.
+11. Click on **Add Redirect** and enter `https://[site-name].netlify.app/.netlify/functions/oauth-callback`, replacing `[site-name]` by the name you picked in step 8 (or the entire Netlify domain by your own domain, if you opted for that).
 
-12. You should be good to go! You might want to test if it works as intended with an alt account, and if you encounter any problems feel free to [create an issue on GitHub](https://github.com/sylveon/discord-ban-appeals/issues/new).
+12. Hit the green **Save Changes** button.
+
+13. You should be good to go! You might want to test if it works as intended with an alt account, and if you encounter any problems feel free to [create an issue on GitHub](https://github.com/sylveon/discord-ban-appeals/issues/new).
