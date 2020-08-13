@@ -49,8 +49,16 @@
                 return JSON.parse(jsonPayload);
             };
 
-            const jwt = new URLSearchParams(document.location.search.substring(1)).get("token");
+            const params = new URLSearchParams(document.location.search.substring(1));
+            if (!params.has("state") || !params.has("token")) {
+                window.location.href = `/error?msg=${encodeURIComponent("Missing state or token")}`;
+            }
 
+            if (params.get("state") !== localStorage.getItem("state")) {
+                window.location.href = `/error?msg=${encodeURIComponent("Invalid state")}`;
+            }
+
+            const jwt = params.get("token");
             const userInfo = parseJwt(jwt);
 
             const avatar = userInfo.avatar
