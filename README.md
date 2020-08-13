@@ -37,7 +37,7 @@ By using OAuth2, it ensures users can't forge or fake appeals.
 
 9. Go back to the [Discord Developer Portal](https://discord.com/developers/applications), open the dashboard for the application you created in step 1, and click on **OAuth2**.
 
-10. Click on **Add Redirect** and enter `https://[site-name].netlify/app/.netlify/functions/oauth-callback`, replacing `[site-name]` by the name you picked in step 8 (or the entire Netlify domain by your own domain, if you opted for that).
+10. Click on **Add Redirect** and enter `https://[site-name].netlify.app/.netlify/functions/oauth-callback`, replacing `[site-name]` by the name you picked in step 8 (or the entire Netlify domain by your own domain, if you opted for that).
 
 11. Hit the green **Save Changes** button.
 
