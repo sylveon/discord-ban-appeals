@@ -31,6 +31,16 @@ async function main() {
         });
     }
 
+    if (process.env.DISABLE_UNBAN_LINK) {
+        const unban = path.resolve(__dirname, "func", "unban.js");
+        fs.unlink(unban, err => {
+            if (err) {
+                console.log(err);
+                process.exit(1);
+            }
+        });
+    }
+
     // Make sure the bot connected to the gateway at least once.
     const client = new Discord.Client();
     try {

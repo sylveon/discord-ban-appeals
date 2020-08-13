@@ -49,7 +49,7 @@ exports.handler = async function (event, context) {
             }
         ];
 
-        if (process.env.GUILD_ID) {
+        if (process.env.GUILD_ID && !process.env.DISABLE_UNBAN_LINK) {
             const unbanUrl = new URL("/.netlify/functions/unban", process.env.URL);
             const unbanInfo = {
                 userId: userInfo.id
