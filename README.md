@@ -31,7 +31,7 @@ By using OAuth2, it ensures users can't forge or fake appeals.
    | Channel ID            | Same deal than the guild ID, but with the channel you created in step 3.                                                   |
    | JSON Web Token secret | Use a password manager to generate a password with ~50 characters, or mash your keyboard.                                  |
 
-7. Login to the Netlify dashboard and go to the settings for your site.
+7. Login to the [Netlify dashboard](https://app.netlify.com) and go to the settings for your site.
 
 8. Click **Change site name** and give it an appropriate name, or [setup a custom domain](https://docs.netlify.com/domains-https/custom-domains/).
 
