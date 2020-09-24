@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const { API_ENDPOINT } = require("./helpers/discord-helpers.js");
+const { API_ENDPOINT, MAX_EMBED_FIELD_CHARS } = require("./helpers/discord-helpers.js");
 const { createJwt, decodeJwt } = require("./helpers/jwt-helpers.js");
 
 exports.handler = async function (event, context) {
@@ -37,15 +37,15 @@ exports.handler = async function (event, context) {
             },
             {
                 name: "Why where you banned?",
-                value: payload.banReason.slice(0, 1024)
+                value: payload.banReason.slice(0, MAX_EMBED_FIELD_CHARS)
             },
             {
                 name: "Why do you feel you should be unbanned?",
-                value: payload.appealText.slice(0, 1024)
+                value: payload.appealText.slice(0, MAX_EMBED_FIELD_CHARS)
             },
             {
                 name: "What will you do to avoid being banned in the future?",
-                value: payload.futureActions.slice(0, 1024)
+                value: payload.futureActions.slice(0, MAX_EMBED_FIELD_CHARS)
             }
         ];
 

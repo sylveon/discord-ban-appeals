@@ -44,6 +44,8 @@ textarea {
 
     transition: border-color .2s ease-in-out;
     resize: none;
+
+    overflow-y: hidden;
 }
 
 textarea:hover {
@@ -52,6 +54,24 @@ textarea:hover {
 
 textarea:focus {
     border-color: #7289da !important;
+}
+
+.textInput {
+    position: relative;
+}
+
+.remainingLength {
+    position: absolute;
+    bottom: 12px;
+    right: 14px;
+    font-size: 12px;
+    font-family: monospace;
+    pointer-events: none;
+    color: #72767d;
+}
+
+.lowOnSpace {
+    color: red;
 }
 
 #username {
