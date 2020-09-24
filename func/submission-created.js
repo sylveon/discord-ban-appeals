@@ -37,15 +37,15 @@ exports.handler = async function (event, context) {
             },
             {
                 name: "Why where you banned?",
-                value: payload.banReason
+                value: payload.banReason.slice(0, 1024)
             },
             {
                 name: "Why do you feel you should be unbanned?",
-                value: payload.appealText
+                value: payload.appealText.slice(0, 1024)
             },
             {
                 name: "What will you do to avoid being banned in the future?",
-                value: payload.futureActions
+                value: payload.futureActions.slice(0, 1024)
             }
         ];
 
