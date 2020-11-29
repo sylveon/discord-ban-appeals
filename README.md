@@ -25,7 +25,7 @@ By using OAuth2, it ensures users can't forge or fake appeals.
    | Field name            | Instructions                                                                                                               |
    | :-------------------- | :------------------------------------------------------------------------------------------------------------------------- |
    | Client ID             | You can get this from the **General Information** section for the application you created in step 1.                       |
-   | Client secret         | Same as the client ID.                                                                                                     |
+   | Client secret         | You can get this from the **General Information** section for the application you created in step 1.                       |
    | Bot token             | Get this in the **Bot** section that you used in step 2.                                                                   |
    | Guild ID              | This is where the developer mode you enabled in step 4 comes in handy. Right click your server icon and press **Copy ID**. |
    | Channel ID            | Same deal than the guild ID, but with the channel you created in step 3.                                                   |
