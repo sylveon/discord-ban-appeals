@@ -36,7 +36,7 @@ exports.handler = async function (event, context) {
                 value: `<@${userInfo.id}> (${userInfo.username}#${userInfo.discriminator})`
             },
             {
-                name: "Why where you banned?",
+                name: "Why were you banned?",
                 value: payload.banReason.slice(0, MAX_EMBED_FIELD_CHARS)
             },
             {
