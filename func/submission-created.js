@@ -74,10 +74,7 @@ exports.handler = async function (event, context) {
                     userId: userInfo.id
                 };
     
-                message.embed.fields.unshift({
-                    value: `[Approve appeal and unban user](${unbanUrl.toString()}?token=${encodeURIComponent(createJwt(unbanInfo))})`,
-                    inline: true
-                });
+                message.embed.description = `[Approve appeal and unban user](${unbanUrl.toString()}?token=${encodeURIComponent(createJwt(unbanInfo))})`;
             }
         }
 
