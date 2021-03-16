@@ -30,7 +30,16 @@ function callBanApi(userId, guildId, botToken, method) {
 }
 
 async function getBan(userId, guildId, botToken) {
-    return callBanApi(userId, guildId, botToken, "GET");
+    const result = await callBanApi(userId, guildId, botToken, "GET");
+
+    if (result.ok) {
+        return await result.json();
+    } else if (result.status === 404) {
+        return null;
+    } else {
+        console.log(await result.json());
+        throw new Error("Failed to get user ban");
+    }
 }
 
 async function unbanUser(userId, guildId, botToken) {
