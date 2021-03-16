@@ -29,8 +29,17 @@ function callBanApi(userId, guildId, botToken, method) {
     });
 }
 
-async function userIsBanned(userId, guildId, botToken) {
-    return (await callBanApi(userId, guildId, botToken, "GET")).ok;
+async function getBan(userId, guildId, botToken) {
+    const result = await callBanApi(userId, guildId, botToken, "GET");
+
+    if (result.ok) {
+        return await result.json();
+    } else if (result.status === 403 || result.status === 404) {
+        return null;
+    } else {
+        console.log(await result.json());
+        throw new Error("Failed to get user ban");    
+    }
 }
 
 async function unbanUser(userId, guildId, botToken) {
@@ -42,4 +51,4 @@ async function unbanUser(userId, guildId, botToken) {
     }
 }
 
-module.exports = { getUserInfo, userIsBanned, unbanUser };
+module.exports = { getUserInfo, getBan, unbanUser };

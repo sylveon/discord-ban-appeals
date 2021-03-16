@@ -1,7 +1,8 @@
 const fetch = require("node-fetch");
 
-const { API_ENDPOINT, MAX_EMBED_FIELD_CHARS } = require("./helpers/discord-helpers.js");
+const { API_ENDPOINT, MAX_EMBED_FIELD_CHARS, MAX_EMBED_FOOTER_CHARS } = require("./helpers/discord-helpers.js");
 const { createJwt, decodeJwt } = require("./helpers/jwt-helpers.js");
+const { getBan } = require("./helpers/user-helpers.js");
 
 exports.handler = async function (event, context) {
     let payload;
@@ -30,35 +31,54 @@ exports.handler = async function (event, context) {
         payload.token !== undefined) {
         
         const userInfo = decodeJwt(payload.token);
-        const embedFields = [
-            {
-                name: "Submitter",
-                value: `<@${userInfo.id}> (${userInfo.username}#${userInfo.discriminator})`
-            },
-            {
-                name: "Why were you banned?",
-                value: payload.banReason.slice(0, MAX_EMBED_FIELD_CHARS)
-            },
-            {
-                name: "Why do you feel you should be unbanned?",
-                value: payload.appealText.slice(0, MAX_EMBED_FIELD_CHARS)
-            },
-            {
-                name: "What will you do to avoid being banned in the future?",
-                value: payload.futureActions.slice(0, MAX_EMBED_FIELD_CHARS)
+        const message = {
+            embed: {
+                title: "New appeal submitted!",
+                timestamp: new Date().toISOString(),
+                fields: [
+                    {
+                        name: "Submitter",
+                        value: `<@${userInfo.id}> (${userInfo.username}#${userInfo.discriminator})`
+                    },
+                    {
+                        name: "Why were you banned?",
+                        value: payload.banReason.slice(0, MAX_EMBED_FIELD_CHARS)
+                    },
+                    {
+                        name: "Why do you feel you should be unbanned?",
+                        value: payload.appealText.slice(0, MAX_EMBED_FIELD_CHARS)
+                    },
+                    {
+                        name: "What will you do to avoid being banned in the future?",
+                        value: payload.futureActions.slice(0, MAX_EMBED_FIELD_CHARS)
+                    }
+                ]
             }
-        ];
+        }
 
-        if (process.env.GUILD_ID && !process.env.DISABLE_UNBAN_LINK) {
-            const unbanUrl = new URL("/.netlify/functions/unban", process.env.URL);
-            const unbanInfo = {
-                userId: userInfo.id
-            };
+        if (process.env.GUILD_ID) {
+            try {
+                const ban = await getBan(userInfo.id, process.env.GUILD_ID, process.env.DISCORD_BOT_TOKEN);
+                if (ban !== null && ban.reason) {
+                    message.embed.footer = {
+                        text: `**Original ban reason:** ${ban.reason}`.slice(0, MAX_EMBED_FOOTER_CHARS)
+                    };
+                }
+            } catch (e) {
+                console.log(e);
+            }
 
-            embedFields.push({
-                name: "Actions",
-                value: `[Approve appeal and unban user](${unbanUrl.toString()}?token=${encodeURIComponent(createJwt(unbanInfo))})`
-            });
+            if (!process.env.DISABLE_UNBAN_LINK) {
+                const unbanUrl = new URL("/.netlify/functions/unban", process.env.URL);
+                const unbanInfo = {
+                    userId: userInfo.id
+                };
+    
+                message.embed.fields.unshift({
+                    value: `[Approve appeal and unban user](${unbanUrl.toString()}?token=${encodeURIComponent(createJwt(unbanInfo))})`,
+                    inline: true
+                });
+            }
         }
 
         const result = await fetch(`${API_ENDPOINT}/channels/${encodeURIComponent(process.env.APPEALS_CHANNEL)}/messages`, {
@@ -67,13 +87,7 @@ exports.handler = async function (event, context) {
                 "Content-Type": "application/json",
                 "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`
             },
-            body: JSON.stringify({
-                embed: {
-                    title: "New appeal submitted!",
-                    timestamp: new Date().toISOString(),
-                    fields: embedFields
-                }
-            })
+            body: JSON.stringify(message)
         });
 
         if (result.ok) {

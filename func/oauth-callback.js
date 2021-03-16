@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const { getUserInfo, userIsBanned } = require("./helpers/user-helpers.js");
+const { getUserInfo, getBan } = require("./helpers/user-helpers.js");
 const { createJwt } = require("./helpers/jwt-helpers.js");
 
 exports.handler = async function (event, context) {
@@ -32,11 +32,12 @@ exports.handler = async function (event, context) {
 
         const user = await getUserInfo(data.access_token);
         if (process.env.GUILD_ID && !process.env.SKIP_BAN_CHECK) {
-            if (!await userIsBanned(user.id, process.env.GUILD_ID, process.env.DISCORD_BOT_TOKEN)) {
+            const ban = await getBan(user.id, process.env.GUILD_ID, process.env.DISCORD_BOT_TOKEN);
+            if (ban !== null) {
                 return {
                     statusCode: 303,
                     headers: {
-                        "Location": "/error?"
+                        "Location": "/error"
                     }
                 };
             }
