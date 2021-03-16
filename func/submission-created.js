@@ -61,7 +61,7 @@ exports.handler = async function (event, context) {
                 const ban = await getBan(userInfo.id, process.env.GUILD_ID, process.env.DISCORD_BOT_TOKEN);
                 if (ban !== null && ban.reason) {
                     message.embed.footer = {
-                        text: `**Original ban reason:** ${ban.reason}`.slice(0, MAX_EMBED_FOOTER_CHARS)
+                        text: `Original ban reason: ${ban.reason}`.slice(0, MAX_EMBED_FOOTER_CHARS)
                     };
                 }
             } catch (e) {
