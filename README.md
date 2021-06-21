@@ -11,9 +11,8 @@ By using OAuth2, it ensures users can't forge or fake appeals.
 2. In the **Bot** section of the newly created application's dashboard, create a bot account and invite it to your server with the **Ban Members** permission.  
    > **Pro tip**: Use a [permissions calculator](https://finitereality.github.io/permissions-calculator/) to generate the invite link!
 
-3. In your server, create a channel dedicated to ban appeals. Ensure only mods and the bot can view the channel:  
-   ![](https://cdn.discordapp.com/attachments/688870664941076514/743300978119278642/unknown.png)  
-   The bot will also need the permission to send messages and embed images here.
+3. In your server, create a channel dedicated to ban appeals. Ensure only mods and the bot can view the channel, and that the bot has the **Send Messages** and **Embed Links** permissions for this channel.  
+   ![](https://cdn.discordapp.com/attachments/688870664941076514/743300978119278642/unknown.png)
 
 4. In Discord's settings, go in the **Appearance** section and enable **Developer Mode**. You will need it soon.  
    ![](https://cdn.discordapp.com/attachments/688870664941076514/743301339752169522/unknown.png)
