@@ -43,3 +43,7 @@ By using OAuth2, it ensures users can't forge or fake appeals.
 12. Hit the green **Save Changes** button.
 
 13. You should be good to go! You might want to test if it works as intended with an alt account, and if you encounter any problems feel free to [create an issue on GitHub](https://github.com/sylveon/discord-ban-appeals/issues/new).
+
+## Blocking users
+
+Users that spam requests can be blocked by creating an environment variable called `BLOCKED_USERS`, which should contain a comma-separated list of quoted user IDs.
