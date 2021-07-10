@@ -31,6 +31,17 @@ exports.handler = async function (event, context) {
         payload.token !== undefined) {
         
         const userInfo = decodeJwt(payload.token);
+        
+        const blockedUsers = JSON.parse(`[${process.env.BLOCKED_USERS || ""}]`);
+        if (blockedUsers.indexOf(userInfo.id) > -1) {
+            return {
+                statusCode: 303,
+                headers: {
+                    "Location": `/error?msg=${encodeURIComponent("You cannot submit ban appeals with this Discord account.")}`,
+                },
+            };
+        }
+        
         const message = {
             embed: {
                 title: "New appeal submitted!",
