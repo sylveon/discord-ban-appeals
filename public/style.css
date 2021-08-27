@@ -12,9 +12,13 @@ h1 {
     color: white;
 }
 
+h2, p {
+    color: #b9bbbe;
+}
+
 button, a.btn {
     color: white !important;
-    background-color: #7289da !important;
+    background-color: hsl(235,85.6%,64.7%) !important;
     border: none !important;
     box-shadow: none !important;
 
@@ -22,11 +26,11 @@ button, a.btn {
 }
 
 button:hover, a.btn:hover {
-    background-color: #677bc4 !important;
+    background-color: hsl(235,51.4%,52.4%) !important;
 }
 
 button:active, a.btn:active {
-    background-color: #5b6eae !important;
+    background-color: hsl(235,46.7%,44.1%) !important;
 }
 
 label {
