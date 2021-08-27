@@ -31,6 +31,16 @@ exports.handler = async function (event, context) {
         }
 
         const user = await getUserInfo(data.access_token);
+        const blockedUsers = JSON.parse(`[${process.env.BLOCKED_USERS || ""}]`);
+        if (blockedUsers.indexOf(user.id) > -1) {
+            return {
+                statusCode: 303,
+                headers: {
+                    "Location": `/error?msg=${encodeURIComponent("You cannot submit ban appeals with this Discord account.")}`,
+                },
+            };
+        }
+        
         if (process.env.GUILD_ID && !process.env.SKIP_BAN_CHECK) {
             const ban = await getBan(user.id, process.env.GUILD_ID, process.env.DISCORD_BOT_TOKEN);
             if (ban === null) {
