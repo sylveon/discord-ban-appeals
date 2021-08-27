@@ -125,6 +125,14 @@ select {
     box-shadow: none !important;
 }
 
+select:invalid {
+    color: #72767d !important;
+}
+
+option {
+    color: #b9bbbe;
+}
+
 textarea {
     color: #dcddde !important;
 
