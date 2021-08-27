@@ -16,6 +16,10 @@ h2, p {
     color: #b9bbbe;
 }
 
+a {
+    color: hsl(197,100%,47.8%);
+}
+
 button, a.btn {
     color: white !important;
     background-color: hsl(235,85.6%,64.7%) !important;
@@ -35,6 +39,90 @@ button:active, a.btn:active {
 
 label {
     color: #8e9297;
+}
+
+label.radio {
+    position: relative;
+    display: block;
+    padding: 10px;
+
+    border-radius: 4px;
+    background-color: #2f3136;
+    color: #b9bbbe;
+
+    margin-bottom: 8px;
+
+    cursor: pointer;
+}
+
+label.radio:hover {
+    background-color: rgba(79,84,92,0.16);
+    color: #dcddde;
+}
+
+label.radio.checked {
+    background-color: #202225;
+    color: #ffffff;
+}
+
+label.radio > span:not(.checkmark) {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+
+    margin-left: 32px;
+}
+
+label.radio > input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+label.radio > .checkmark {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    height: 20px;
+    width: 20px;
+    padding: 3px;
+
+    border-radius: 50%;
+    border-width: 2px;
+    border-color: #b9bbbe;
+    border-style: solid;
+}
+
+label.radio:hover > .checkmark {
+    border-color: #dcddde;
+}
+
+label.radio.checked > .checkmark {
+    border-color: #ffffff;
+}
+
+label.radio > .checkmark > span {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+label.radio.checked > .checkmark > span {
+    background-color: hsl(235,86.1%,77.5%);
+}
+
+select {
+    background-color: #2f3136 !important;
+
+    border: 1px solid #202225 !important;
+    cursor: pointer !important;
+    color: #dcddde !important;
+    border-radius: 4px !important;
+    font-weight: 500 !important;
+
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 textarea {
@@ -57,7 +145,7 @@ textarea:hover {
 }
 
 textarea:focus {
-    border-color: #7289da !important;
+    border-color: hsl(197,100%,47.8%) !important;
 }
 
 .textInput {
