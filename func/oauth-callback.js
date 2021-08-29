@@ -18,7 +18,7 @@ exports.handler = async function (event, context) {
                 client_secret: process.env.DISCORD_CLIENT_SECRET,
                 grant_type: "authorization_code",
                 code: event.queryStringParameters.code,
-                redirect_uri: new URL(event.path, process.env.URL),
+                redirect_uri: new URL(event.path, DEPLOY_PRIME_URL),
                 scope: "identify"
             })
         });

@@ -28,7 +28,9 @@ async function main() {
         fs.unlink(path.resolve(__dirname, "func", "unban.js"), assertSuccess);
     }
 
-    replaceInFile(path.resolve(__dirname, "func", "oauth.js"), "DEPLOY_PRIME_URL", `"${process.env.CONTEXT === "production" ? process.env.URL : process.env.DEPLOY_PRIME_URL}"`);
+    const url = process.env.CONTEXT === "production" ? process.env.URL : process.env.DEPLOY_PRIME_URL;
+    replaceInFile(path.resolve(__dirname, "func", "oauth.js"), "DEPLOY_PRIME_URL", `"${url}"`);
+    replaceInFile(path.resolve(__dirname, "func", "oauth-callback.js"), "DEPLOY_PRIME_URL", `"${url}"`);
 
     // Make sure the bot connected to the gateway at least once.
     const client = new Discord.Client();
