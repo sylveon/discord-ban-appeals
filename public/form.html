@@ -99,6 +99,17 @@
                 updateTextarea();
                 textarea.oninput = updateTextarea;
             })
+            
+            const form = document.querySelector("form");
+            form.addEventListener("change", event => {
+                if (event.target.type === "radio" && event.target.parentElement && event.target.parentElement.tagName.toLowerCase() === "label") {
+                    const prior = form.querySelector('label.checked input[name="' + event.target.name + '"]');
+                    if (prior) {
+                        prior.parentElement.classList.remove("checked");
+                    }
+                    event.target.parentElement.classList.add( "checked" );
+                }
+            }, false);
         </script>
     </body>
 </html>
