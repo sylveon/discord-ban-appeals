@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 function createJwt(data, duration) {
     const options = {
-        issuer: 'ban-appeals-backend'
+        issuer: 'mod-applications-backend'
     };
 
     if (duration) {

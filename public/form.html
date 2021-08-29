@@ -8,11 +8,16 @@
         <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
 
-        <title>Ban appeal form</title>
+        <title>Mod application form</title>
+        <style>
+            label:not(.radio) {
+                font-size: 1.25rem;
+            }
+        </style>
     </head>
     <body>
         <div class="jumbotron text-center">
-            <h1>Ban appeal form</h1>
+            <h1>Mod application form</h1>
         </div>
 
         <div class="container mb-3">
@@ -24,23 +29,116 @@
             <form class="mt-3" method="post" name="appeal" action="/success" netlify>
                 <input type="hidden" id="token" name="token">
                 <div class="form-group">
-                    <label for="banReason">Why were you banned?</label>
+                    <label for="timezone">Which timezone do you currently live in?</label>
+                    <p><i>Please use <a href="https://whatismytimezone.com/" target="_blank">https://whatismytimezone.com/</a> if you're not sure.</i></p>
+                    <select class="form-control" id="timezone" name="timezone" required>
+                        <option value="" selected disabled hidden>Select your answer</option>
+                        <option value="gmt_minus12">GMT -12:00</option>
+                        <option value="gmt_minus11">GMT -11:00</option>
+                        <option value="gmt_minus10">GMT -10:00</option>
+                        <option value="gmt_minus930">GMT -09:30</option>
+                        <option value="gmt_minus9">GMT -09:00</option>
+                        <option value="gmt_minus8">GMT -08:00</option>
+                        <option value="gmt_minus7">GMT -07:00</option>
+                        <option value="gmt_minus6">GMT -06:00</option>
+                        <option value="gmt_minus5">GMT -05:00</option>
+                        <option value="gmt_minus4">GMT -04:00</option>
+                        <option value="gmt_minus330">GMT -03:30</option>
+                        <option value="gmt_minus3">GMT -03:00</option>
+                        <option value="gmt_minus2">GMT -02:00</option>
+                        <option value="gmt_minus1">GMT -01:00</option>
+                        <option value="gmt">GMT ±00:00</option>
+                        <option value="gmt_plus1">GMT +01:00</option>
+                        <option value="gmt_plus2">GMT +02:00</option>
+                        <option value="gmt_plus3">GMT +03:00</option>
+                        <option value="gmt_plus330">GMT +03:30</option>
+                        <option value="gmt_plus4">GMT +04:00</option>
+                        <option value="gmt_plus430">GMT +04:30</option>
+                        <option value="gmt_plus5">GMT +05:00</option>
+                        <option value="gmt_plus530">GMT +05:30</option>
+                        <option value="gmt_plus545">GMT +05:45</option>
+                        <option value="gmt_plus6">GMT +06:00</option>
+                        <option value="gmt_plus630">GMT +06:30</option>
+                        <option value="gmt_plus7">GMT +07:00</option>
+                        <option value="gmt_plus8">GMT +08:00</option>
+                        <option value="gmt_plus845">GMT +08:45</option>
+                        <option value="gmt_plus9">GMT +09:00</option>
+                        <option value="gmt_plus930">GMT +09:30</option>
+                        <option value="gmt_plus10">GMT +10:00</option>
+                        <option value="gmt_plus1030">GMT +10:30</option>
+                        <option value="gmt_plus11">GMT +11:00</option>
+                        <option value="gmt_plus12">GMT +12:00</option>
+                        <option value="gmt_plus1245">GMT +12:45</option>
+                        <option value="gmt_plus13">GMT +13:00</option>
+                        <option value="gmt_plus14">GMT +14:00</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="timeAsActiveUser">How long have you been an active user of Discord?</label>
+                    <label class="radio">
+                        <input type="radio" name="timeAsActiveUser" id="lessThanAMonth" value="lessThanAMonth" required><span class="checkmark"><span></span></span><span>Less than a month</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="timeAsActiveUser" id="oneTo7Months" value="oneTo7Months"><span class="checkmark"><span></span></span><span>1-7 months</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="timeAsActiveUser" id="sevenTo12Months" value="sevenTo12Months"><span class="checkmark"><span></span></span><span>7-12 months</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="timeAsActiveUser" id="oneTo2Years" value="oneTo2Years"><span class="checkmark"><span></span></span><span>1-2 years</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="timeAsActiveUser" id="twoTo3Years" value="twoTo3Years"><span class="checkmark"><span></span></span><span>2-3 years</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="timeAsActiveUser" id="moreThan3Years" value="moreThan3Years"><span class="checkmark"><span></span></span><span>3+ years</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="timeAsActiveUser" id="iDontKnow" value="iDontKnow"><span class="checkmark"><span></span></span><span>I don't know</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="experience">How much moderation experience do you have on Discord?</label>
+                    <label class="radio">
+                        <input type="radio" name="experience" id="lessThanAYear" value="lessThanAYear" required><span class="checkmark"><span></span></span><span>Less than a year</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="experience" id="oneTo2Years" value="oneTo2Years"><span class="checkmark"><span></span></span><span>1-2 years</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="experience" id="twoTo3Years" value="twoTo3Years"><span class="checkmark"><span></span></span><span>2-3 years</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="experience" id="moreThan3Years" value="moreThan3Years"><span class="checkmark"><span></span></span><span>3+ years</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="experience" id="offPlatform" value="offPlatform"><span class="checkmark"><span></span></span><span>Some on other platforms, but none on Discord</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="experience" id="noExperience" value="noExperience"><span class="checkmark"><span></span></span><span>I have no experience moderating</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="reasoning">Why do you want to be a moderator of this particular server?</label>
+                    <p><i>What value would you bring to our team and community?</i></p>
                     <div class="textInput">
-                        <textarea class="form-control" id="banReason" name="banReason" required maxlength="1024"></textarea>
+                        <textarea class="form-control" id="reasoning" name="reasoning" required maxlength="1024"></textarea>
                         <div class="remainingLength"></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="appealText">Why do you feel you should be unbanned?</label>
+                    <label for="icebreaker">Tell us about yourself! (optional)</label>
+                    <p><i>Break the ice! Or don't. If you're happy to do so, introduce yourself to us here.</i></p>
                     <div class="textInput">
-                        <textarea class="form-control" id="appealText" name="appealText" required maxlength="1024"></textarea>
+                        <textarea class="form-control" id="icebreaker" name="icebreaker" maxlength="1024"></textarea>
                         <div class="remainingLength"></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="futureActions">What will you do to avoid being banned in the future?</label>
+                    <label for="additionalDetails">Anything else you want to say? (optional)</label>
+                    <p><i>If there's something you think you need to tell us regarding your application but it doesn't fit into the rest of this form, feel free to add it here!</i></p>
                     <div class="textInput">
-                        <textarea class="form-control" id="futureActions" name="futureActions" required maxlength="1024"></textarea>
+                        <textarea class="form-control" id="additionalDetails" name="additionalDetails" maxlength="1024"></textarea>
                         <div class="remainingLength"></div>
                     </div>
                 </div>
@@ -99,7 +197,7 @@
                 updateTextarea();
                 textarea.oninput = updateTextarea;
             })
-            
+
             const form = document.querySelector("form");
             form.addEventListener("change", event => {
                 if (event.target.type === "radio" && event.target.parentElement && event.target.parentElement.tagName.toLowerCase() === "label") {
