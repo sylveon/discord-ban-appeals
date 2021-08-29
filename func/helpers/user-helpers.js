@@ -53,7 +53,7 @@ async function unbanUser(userId, guildId, botToken) {
 
 function isBlocked(userId) {
     if (process.env.BLOCKED_USERS) {
-        const blockedUsers = process.env.BLOCKED_USERS.split(",").filter(Boolean).map(u => parseInt(u, 10));
+        const blockedUsers = process.env.BLOCKED_USERS.replace(/"/g, "").split(",").filter(Boolean);
         if (blockedUsers.indexOf(userId) > -1) {
             return true;
         }
