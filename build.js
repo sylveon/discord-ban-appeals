@@ -3,43 +3,32 @@ const fs = require("fs");
 const path = require("path");
 const process = require("process");
 
+function assertSuccess(err) {
+    if (err) {
+        console.log(err);
+        process.exit(1);
+    }
+}
+
+function replaceInFile(file, original, replacement) {
+    fs.readFile(file, "UTF-8", (err, data) => {
+        assertSuccess(err);
+
+        fs.writeFile(file, data.replace(original, replacement), "UTF-8", assertSuccess);
+    });
+}
+
 async function main() {
     if (!process.env.USE_NETLIFY_FORMS) {
-        const submissionOldFunction = path.resolve(__dirname, "func", "submission-created.js");
-        const submissionNewFunction = path.resolve(__dirname, "func", "submit-appeal.js");
-        fs.rename(submissionOldFunction, submissionNewFunction, err => {
-            if (err) {
-                console.log(err);
-                process.exit(1);
-            }
-        });
-
-        const form = path.resolve(__dirname, "public", "form.html");
-        fs.readFile(form, "UTF-8", (err, data) => {
-            if (err) {
-                console.log(err);
-                process.exit(1);
-            }
-
-            data = data.replace("action=\"/success\" netlify", "action=\"/.netlify/functions/submit-appeal\"");
-            fs.writeFile(form, data, "UTF-8", err => {
-                if (err) {
-                    console.log(err);
-                    process.exit(1);
-                }
-            });
-        });
+        fs.rename(path.resolve(__dirname, "func", "submission-created.js"), path.resolve(__dirname, "func", "submit-appeal.js"), assertSuccess);
+        replaceInFile(path.resolve(__dirname, "public", "form.html"), "action=\"/success\" netlify", "action=\"/.netlify/functions/submit-appeal\"");
     }
 
     if (process.env.DISABLE_UNBAN_LINK) {
-        const unban = path.resolve(__dirname, "func", "unban.js");
-        fs.unlink(unban, err => {
-            if (err) {
-                console.log(err);
-                process.exit(1);
-            }
-        });
+        fs.unlink(path.resolve(__dirname, "func", "unban.js"), assertSuccess);
     }
+
+    replaceInFile(path.resolve(__dirname, "func", "oauth.js"), "DEPLOY_PRIME_URL", `"${process.env.DEPLOY_PRIME_URL}"`);
 
     // Make sure the bot connected to the gateway at least once.
     const client = new Discord.Client();
