@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const { getUserInfo, getBan } = require("./helpers/user-helpers.js");
+const { getUserInfo, getBan, isBlocked } = require("./helpers/user-helpers.js");
 const { createJwt } = require("./helpers/jwt-helpers.js");
 
 exports.handler = async function (event, context) {
@@ -31,8 +31,7 @@ exports.handler = async function (event, context) {
         }
 
         const user = await getUserInfo(data.access_token);
-        const blockedUsers = JSON.parse(`[${process.env.BLOCKED_USERS || ""}]`);
-        if (blockedUsers.indexOf(user.id) > -1) {
+        if (isBlocked(user.id)) {
             return {
                 statusCode: 303,
                 headers: {

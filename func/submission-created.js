@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 const { API_ENDPOINT, MAX_EMBED_FIELD_CHARS, MAX_EMBED_FOOTER_CHARS } = require("./helpers/discord-helpers.js");
 const { createJwt, decodeJwt } = require("./helpers/jwt-helpers.js");
-const { getBan } = require("./helpers/user-helpers.js");
+const { getBan, isBlocked } = require("./helpers/user-helpers.js");
 
 exports.handler = async function (event, context) {
     let payload;
@@ -31,6 +31,14 @@ exports.handler = async function (event, context) {
         payload.token !== undefined) {
         
         const userInfo = decodeJwt(payload.token);
+        if (isBlocked(userInfo.id)) {
+            return {
+                statusCode: 303,
+                headers: {
+                    "Location": `/error?msg=${encodeURIComponent("You cannot submit ban appeals with this Discord account.")}`,
+                },
+            };
+        }
         
         const message = {
             embed: {
