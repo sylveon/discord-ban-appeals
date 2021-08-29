@@ -99,7 +99,7 @@
                 updateTextarea();
                 textarea.oninput = updateTextarea;
             })
-            
+
             const form = document.querySelector("form");
             form.addEventListener("change", event => {
                 if (event.target.type === "radio" && event.target.parentElement && event.target.parentElement.tagName.toLowerCase() === "label") {
