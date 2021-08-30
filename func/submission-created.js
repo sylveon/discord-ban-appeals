@@ -78,7 +78,7 @@ exports.handler = async function (event, context) {
             }
 
             if (!process.env.DISABLE_UNBAN_LINK) {
-                const unbanUrl = new URL("/.netlify/functions/unban", process.env.URL);
+                const unbanUrl = new URL("/.netlify/functions/unban", DEPLOY_PRIME_URL);
                 const unbanInfo = {
                     userId: userInfo.id
                 };
