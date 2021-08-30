@@ -181,7 +181,7 @@ exports.handler = async function (event, context) {
                 };
             }
         } else {
-            console.log(await result.json());
+            console.log(JSON.stringify(await result.json()));
             throw new Error("Failed to submit message");
         }
     }
