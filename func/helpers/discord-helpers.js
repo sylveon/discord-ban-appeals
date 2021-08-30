@@ -1,4 +1,4 @@
-const API_ENDPOINT = "https://discord.com/api/v6";
+const API_ENDPOINT = "https://discord.com/api/v9";
 const MAX_EMBED_FIELD_CHARS = 1024;
 const MAX_EMBED_FOOTER_CHARS = 2048;
 
