@@ -52,7 +52,7 @@ async function main() {
         console.log(e);
         process.exit(1);
     }
-    client.destroy();
+    bot.disconnect();
 }
 
 main();
