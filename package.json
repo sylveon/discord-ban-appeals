@@ -1,4 +1,5 @@
 {
+    "type": "module",
     "dependencies": {
         "discord.js": "^13.6.0",
         "jsonwebtoken": "^8.5.1",
