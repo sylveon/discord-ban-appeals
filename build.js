@@ -1,4 +1,4 @@
-import Discord from "discord.js";
+import Eris from "eris";
 import fs from "fs";
 import path from "path";
 import process from "process";
@@ -42,9 +42,9 @@ async function main() {
     }
 
     // Make sure the bot connected to the gateway at least once.
-    const client = new Discord.Client();
+    const bot = new Eris(process.env.DISCORD_BOT_TOKEN);
     try {
-        await client.login(process.env.DISCORD_BOT_TOKEN);
+        await bot.connect();
     } catch (e) {
         console.log(e);
         process.exit(1);
