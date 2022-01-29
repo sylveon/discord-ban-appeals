@@ -2,6 +2,9 @@ import Eris from "eris";
 import fs from "fs";
 import path from "path";
 import process from "process";
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function assertSuccess(err) {
     if (err) {

@@ -1,7 +1,7 @@
 [build]
   publish = "public"
   functions = "func"
-  command = "node build.js"
+  command = "node build.js --unhandled-rejections=strict"
 
 [build.environment]
   AWS_LAMBDA_JS_RUNTIME = "nodejs14.x"
