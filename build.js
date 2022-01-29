@@ -46,13 +46,14 @@ async function main() {
 
     // Make sure the bot connected to the gateway at least once.
     const bot = new Eris(process.env.DISCORD_BOT_TOKEN);
+    bot.on("ready", () => bot.disconnect());
+    
     try {
         await bot.connect();
     } catch (e) {
         console.log(e);
         process.exit(1);
     }
-    bot.disconnect();
 }
 
 main();
