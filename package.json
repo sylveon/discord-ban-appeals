@@ -1,7 +1,7 @@
 {
     "dependencies": {
-        "discord.js": "^12.2.0",
+        "discord.js": "^13.6.0",
         "jsonwebtoken": "^8.5.1",
-        "node-fetch": "^3.1.1"
+        "node-fetch": "^3.2.0"
     }
 }

@@ -1,9 +1,9 @@
-const fetch = require("node-fetch");
+import fetch from 'node-fetch';
 
-const { getUserInfo, getBan, isBlocked } = require("./helpers/user-helpers.js");
-const { createJwt } = require("./helpers/jwt-helpers.js");
+import { getUserInfo, getBan, isBlocked } from "./helpers/user-helpers.js";
+import { createJwt } from "./helpers/jwt-helpers.js";
 
-exports.handler = async function (event, context) {
+export async function handler(event, context) {
     if (event.httpMethod !== "GET") {
         return {
             statusCode: 405

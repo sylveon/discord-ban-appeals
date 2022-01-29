@@ -1,5 +1,3 @@
-const API_ENDPOINT = "https://discord.com/api/v9";
-const MAX_EMBED_FIELD_CHARS = 1024;
-const MAX_EMBED_FOOTER_CHARS = 2048;
-
-module.exports = { API_ENDPOINT, MAX_EMBED_FIELD_CHARS, MAX_EMBED_FOOTER_CHARS };
+export const API_ENDPOINT = "https://discord.com/api/v9";
+export const MAX_EMBED_FIELD_CHARS = 1024;
+export const MAX_EMBED_FOOTER_CHARS = 2048;

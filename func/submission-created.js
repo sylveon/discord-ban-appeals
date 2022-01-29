@@ -1,10 +1,10 @@
-const fetch = require("node-fetch");
+import fetch from 'node-fetch';
 
-const { API_ENDPOINT, MAX_EMBED_FIELD_CHARS, MAX_EMBED_FOOTER_CHARS } = require("./helpers/discord-helpers.js");
-const { createJwt, decodeJwt } = require("./helpers/jwt-helpers.js");
-const { getBan, isBlocked } = require("./helpers/user-helpers.js");
+import { API_ENDPOINT, MAX_EMBED_FIELD_CHARS, MAX_EMBED_FOOTER_CHARS } from "./helpers/discord-helpers.js";
+import { createJwt, decodeJwt } from "./helpers/jwt-helpers.js";
+import { getBan, isBlocked } from "./helpers/user-helpers.js";
 
-exports.handler = async function (event, context) {
+export async function handler(event, context) {
     let payload;
 
     if (process.env.USE_NETLIFY_FORMS) {
