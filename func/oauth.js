@@ -9,7 +9,7 @@ export async function handler(event, context) {
         statusCode: 303,
         headers: {
             "Location": `https://discord.com/api/oauth2/authorize?client_id=${encodeURIComponent(process.env.DISCORD_CLIENT_ID)}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=identify&prompt=none&state=${state}`,
-            "Set-Cookie": `__Secure-CSRFState=${state}; Domain=${DEPLOY_PRIME_URL}; Path=/.netlify/functions/oauth-callback; Secure; HttpOnly; SameSite=Strict`
+            "Set-Cookie": `__Secure-CSRFState=${state}; Domain=${DEPLOY_PRIME_URL.replace("https://", "")}; Path=/.netlify/functions/oauth-callback; Secure; HttpOnly; SameSite=Strict`
         }
     };
 }
