@@ -18,22 +18,5 @@
         <div class="flex-fill text-center d-flex h-100 justify-content-center align-items-center">
             <a class="btn" id="login" style="font-size: 2rem;" href="/.netlify/functions/oauth">Login with Discord</a>
         </div>
-        <script>
-            function generateRandomString() {
-                const rand = Math.floor(Math.random() * 10);
-                let randStr = "";
-
-                for (let i = 0; i < 20 + rand; i++) {
-                    randStr += String.fromCharCode(33 + Math.floor(Math.random() * 94));
-                }
-
-                return randStr;
-            }
-
-            const state = generateRandomString();
-            localStorage.setItem("state", state);
-
-            document.getElementById("login").href += `?state=${encodeURIComponent(state)}`;
-        </script>
     </body>
 </html>
