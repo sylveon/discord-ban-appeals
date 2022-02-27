@@ -17,7 +17,7 @@ function replaceInFile(file, original, replacement, callback) {
     fs.readFile(file, "UTF-8", (err, data) => {
         assertSuccess(err);
 
-        fs.writeFile(file, data.replace(original, replacement), "UTF-8", err => {
+        fs.writeFile(file, data.replaceAll(original, replacement), "UTF-8", err => {
             assertSuccess(err);
 
             if (callback) {
