@@ -14,8 +14,8 @@ function parseCookies(str) {
 }
 
 function verifyCsrf(event) {
-    if (event.queryStringParameters.state !== undefined && event.headers.Cookie !== undefined) {
-        const cookies = parseCookies(event.headers.Cookie);
+    if (event.queryStringParameters.state !== undefined && event.headers.cookie !== undefined) {
+        const cookies = parseCookies(event.headers.cookie);
         if (cookies["__Secure-CSRFState"] !== undefined) {
             return cookies["__Secure-CSRFState"] === event.queryStringParameters.state;
         }
