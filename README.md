@@ -1,6 +1,6 @@
 # Discord Ban Appeals
 
-This is a form which allows users to appeal their bans from a Discord server.
+This is a form that allows users to appeal their bans from a Discord server.
 
 By using OAuth2, it ensures users can't forge or fake appeals.
 
@@ -14,19 +14,19 @@ By using OAuth2, it ensures users can't forge or fake appeals.
 3. In your server, create a channel dedicated to ban appeals. Ensure only mods and the bot can view the channel, and that the bot has the **Send Messages** and **Embed Links** permissions for this channel.  
    ![](https://cdn.discordapp.com/attachments/924837858878034003/1014080015115239424/unknown.png)
 
-4. In Discord's settings, go in the **Advanced** section and enable **Developer Mode**. You will need it soon.  
+4. In Discord's settings, go to the **Advanced** section and enable **Developer Mode**. You will need it soon.  
    ![](https://cdn.discordapp.com/attachments/924837858878034003/1014086132738306119/unknown.png)
 
 5. Click this button:  
    [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/sylveon/discord-ban-appeals)
 
-6. In the web page that shows, login to your GitHub or GitLab account. You will be presented fields to fill:  
+6. In the web page that shows, login to your GitHub or GitLab account. You will be presented with fields to fill:  
    | Field name            | Instructions                                                                                                               |
    | :-------------------- | :------------------------------------------------------------------------------------------------------------------------- |
    | Client ID             | You can get this from the **General Information** section for the application you created in step 1.                       |
    | Client secret         | You can get this from the **General Information** section for the application you created in step 1.                       |
    | Bot token             | Get this in the **Bot** section that you used in step 2.                                                                   |
-   | Guild ID              | This is where the developer mode you enabled in step 4 comes in handy. Right click your server icon and press **Copy ID**. |
+   | Guild ID              | This is where the developer mode you enabled in step 4 comes in handy. Right-click your server icon and press **Copy ID**. |
    | Channel ID            | Same deal than the guild ID, but with the channel you created in step 3.                                                   |
    | JSON Web Token secret | Use a password manager to generate a password with ~50 characters, or mash your keyboard.                                  |
 
@@ -52,9 +52,9 @@ Users that spam requests can be blocked by creating an environment variable call
 
 2. Under **Environment variables**, click **Edit variables**.
 
-3. Right click on any mention of the user you want to block, and click **Copy ID**. You need developer mode enabled for this option to show up, see instructions above.
+3. Right-click on any mention of the user you want to block, and click **Copy ID**. You need developer mode enabled for this option to show up, see instructions above.
 
-4. Click **New variable**, and create an environment variable with `BLOCKED_USERS` as its key. For the value, paste in the user ID you copied in the previous step.
+4. Click **New variable**, and create an environment variable with `BLOCKED_USERS` as its key. For the value, paste the user ID you copied in the previous step.
    ![](https://i.imgur.com/5hGRufC.png)
 
 5. To add more IDs, add a comma after the first quoted ID, and then repeat these steps starting from step 3.
