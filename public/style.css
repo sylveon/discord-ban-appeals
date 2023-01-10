@@ -1,7 +1,11 @@
+@font-face {
+    font-family: "gg sans";
+    src: url("ggsans.woff2");
+}
+
 body {
     background: #36393f;
-
-    font-family: 'Fira Sans', sans-serif;
+    font-family: "gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .jumbotron {
@@ -25,6 +29,8 @@ button, a.btn {
     background-color: hsl(235,85.6%,64.7%) !important;
     border: none !important;
     box-shadow: none !important;
+
+    padding: 2px 16px !important;
 
     transition: background-color .17s ease;
 }
