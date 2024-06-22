@@ -4,13 +4,10 @@
   command = "node --unhandled-rejections=strict build.js"
 
 [build.environment]
-  AWS_LAMBDA_JS_RUNTIME = "nodejs14.x"
+  AWS_LAMBDA_JS_RUNTIME = "nodejs20.x"
 
 [build.processing]
-  css = { bundle = true, minify = true }
-  js = { bundle = true, minify = true }
   html = { pretty_urls = true }
-  images = { compress = true }
 
 [functions]
   node_bundler = "esbuild"
