@@ -66,14 +66,9 @@
             const jwt = params.get("token");
             const userInfo = parseJwt(jwt);
 
-            const isPomelo = userInfo.discriminator === "0";
+            document.getElementById("avatar").src = `https://cdn.discordapp.com/${userInfo.avatar}?size=256`;
 
-            const avatar = userInfo.avatar
-                ? `avatars/${encodeURIComponent(userInfo.id)}/${encodeURIComponent(userInfo.avatar)}.webp`
-                : `embed/avatars/${isPomelo ? ((userInfo.id >> 22) % 6) : (userInfo.discriminator % 5)}.png`;
-            document.getElementById("avatar").src = `https://cdn.discordapp.com/${avatar}?size=256`;
-
-            document.getElementById("username").textContent = isPomelo ? userInfo.username : `${userInfo.username}#${userInfo.discriminator}`;
+            document.getElementById("username").textContent = userInfo.username;
 
             document.getElementById("token").value = jwt;
 

@@ -47,7 +47,7 @@ export async function handler(event, context) {
                 fields: [
                     {
                         name: "Submitter",
-                        value: `<@${userInfo.id}> (${userInfo.username}#${userInfo.discriminator})`
+                        value: `<@${userInfo.id}> (${userInfo.username})`
                     },
                     {
                         name: "Why were you banned?",
