@@ -78,7 +78,9 @@ export async function handler(event, context) {
 
             const avatar = user.avatar
                 ? `avatars/${encodeURIComponent(user.id)}/${encodeURIComponent(user.avatar)}.webp`
-                : `embed/avatars/${isPomelo ? ((user.id >> 22) % 6) : (user.discriminator % 5)}.png`;
+                : `embed/avatars/${isPomelo 
+                    ? (Number(BigInt(user.id) >> 22n) % 6) 
+                    : (user.discriminator % 5)}.png`;
 
             const username = isPomelo
                 ? user.username
