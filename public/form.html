@@ -70,7 +70,7 @@
 
             const avatar = userInfo.avatar
                 ? `avatars/${encodeURIComponent(userInfo.id)}/${encodeURIComponent(userInfo.avatar)}.webp`
-                : `embed/avatars/${isPomelo ? ((userInfo.id >> 22) % 6) : (userInfo.discriminator % 5)}.png`;
+                : `embed/avatars/${isPomelo ? (Number(BigInt(userInfo.id) >> 22n) % 6) : (userInfo.discriminator % 5)}.png`;
             document.getElementById("avatar").src = `https://cdn.discordapp.com/${avatar}?size=256`;
 
             document.getElementById("username").textContent = isPomelo ? userInfo.username : `${userInfo.username}#${userInfo.discriminator}`;
