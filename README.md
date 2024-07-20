@@ -26,6 +26,7 @@ By using OAuth2, it ensures users can't forge or fake appeals.
    | Client ID             | You can get this from the **General Information** section for the application you created in step 1.                       |
    | Client secret         | You can get this from the **General Information** section for the application you created in step 1.                       |
    | Bot token             | Get this in the **Bot** section that you used in step 2.                                                                   |
+   | Webhook URL           | You can create it in Discord Channel Settings -> Integrations -> Webhooks                                                  |
    | Guild ID              | This is where the developer mode you enabled in step 4 comes in handy. Right-click your server icon and press **Copy ID**. |
    | Channel ID            | Same deal than the guild ID, but with the channel you created in step 3.                                                   |
    | JSON Web Token secret | Use a password manager to generate a password with ~50 characters, or mash your keyboard.                                  |
@@ -43,6 +44,10 @@ By using OAuth2, it ensures users can't forge or fake appeals.
 12. Hit the green **Save Changes** button.
 
 13. You should be good to go! You might want to test if it works as intended with an alt account, and if you encounter any problems feel free to [create an issue on GitHub](https://github.com/sylveon/discord-ban-appeals/issues/new).
+
+## Using webhooks
+
+When you use the `DISCORD_WEBHOOK_URL`, you don't need to specify the `DISCORD_BOT_TOKEN`, `GUILD_ID`, and `APPEALS_CHANNEL` in the environment variables. The message will be sent using the webhook without an unban button.
 
 ## Blocking users
 
