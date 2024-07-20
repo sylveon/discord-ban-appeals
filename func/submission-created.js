@@ -68,7 +68,7 @@ export async function handler(event, context) {
             }
         }
 
-        if (process.env.GUILD_ID) {
+        if (process.env.GUILD_ID && !process.env.DISCORD_WEBHOOK_URL) {
             try {
                 const ban = await getBan(userInfo.id, process.env.GUILD_ID, process.env.DISCORD_BOT_TOKEN);
                 if (ban !== null && ban.reason) {
@@ -98,14 +98,27 @@ export async function handler(event, context) {
             }
         }
 
-        const result = await fetch(`${API_ENDPOINT}/channels/${encodeURIComponent(process.env.APPEALS_CHANNEL)}/messages`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`
-            },
-            body: JSON.stringify(message)
-        });
+        let result;
+        if (!process.env.DISCORD_WEBHOOK_URL) {
+            result = await fetch(`${API_ENDPOINT}/channels/${encodeURIComponent(process.env.APPEALS_CHANNEL)}/messages`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`
+                },
+                body: JSON.stringify(message)
+            });
+        } else {
+            result = await fetch(`${process.env.DISCORD_WEBHOOK_URL}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    embeds: [message.embed]
+                })
+            });
+        }
 
         if (result.ok) {
             if (process.env.USE_NETLIFY_FORMS) {
