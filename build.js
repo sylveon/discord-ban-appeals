@@ -40,7 +40,7 @@ async function main() {
         }
     });
 
-    if (process.env.DISABLE_UNBAN_LINK) {
+    if (process.env.DISABLE_UNBAN_LINK || process.env.DISCORD_WEBHOOK_URL) {
         fs.unlink(path.resolve(func, "unban.js"), assertSuccess);
     }
 
