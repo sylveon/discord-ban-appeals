@@ -61,3 +61,17 @@ Users that spam requests can be blocked by creating an environment variable call
    ![](https://i.imgur.com/jNKgS2B.png)
 
 6. Redeploy the site with **Deploys** -> **Trigger deploy** -> **Deploy site**.
+
+## Using webhooks
+
+When you use the `DISCORD_WEBHOOK_URL`, you don't need to specify the `DISCORD_BOT_TOKEN`, `GUILD_ID`, and `APPEALS_CHANNEL` in the environment variables. The message will be sent using the webhook without an unban button. To do this:
+
+1. On your [Netlify dashboard](https://app.netlify.com), click **Deploys** and navigate to **Deploy settings**, and then to the **Environment** option.
+
+2. Under **Environment variables**, click **Edit variables**.
+
+3. Right-click on any channel and click **Edit Channel** -> **Integrations** -> **Webhooks** -> **Copy Webhook URL**.
+
+4. Click **New variable**, and create an environment variable with `DISCORD_WEBHOOK_URL` as its key. For the value, paste the Webhook URL you copied in the previous step.
+
+5. Redeploy the site with **Deploys** -> **Trigger deploy** -> **Deploy site**.

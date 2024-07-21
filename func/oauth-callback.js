@@ -62,7 +62,7 @@ export async function handler(event, context) {
                 };
             }
     
-            if (process.env.GUILD_ID && !process.env.SKIP_BAN_CHECK) {
+            if (process.env.GUILD_ID && !process.env.SKIP_BAN_CHECK && !process.env.DISCORD_WEBHOOK_URL) {
                 const ban = await getBan(user.id, process.env.GUILD_ID, process.env.DISCORD_BOT_TOKEN);
                 if (ban === null) {
                     return {

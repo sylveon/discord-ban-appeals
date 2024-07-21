@@ -40,19 +40,21 @@ async function main() {
         }
     });
 
-    if (process.env.DISABLE_UNBAN_LINK) {
+    if (process.env.DISABLE_UNBAN_LINK || process.env.DISCORD_WEBHOOK_URL) {
         fs.unlink(path.resolve(func, "unban.js"), assertSuccess);
     }
 
-    // Make sure the bot connected to the gateway at least once.
-    const bot = new Eris(process.env.DISCORD_BOT_TOKEN);
-    bot.on("ready", () => bot.disconnect());
-    
-    try {
-        await bot.connect();
-    } catch (e) {
-        console.log(e);
-        process.exit(1);
+    if(!process.env.DISCORD_WEBHOOK_URL) {
+        // Make sure the bot connected to the gateway at least once.
+        const bot = new Eris(process.env.DISCORD_BOT_TOKEN);
+        bot.on("ready", () => bot.disconnect());
+
+        try {
+            await bot.connect();
+        } catch (e) {
+            console.log(e);
+            process.exit(1);
+        }
     }
 }
 
