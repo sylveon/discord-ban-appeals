@@ -26,7 +26,6 @@ By using OAuth2, it ensures users can't forge or fake appeals.
    | Client ID             | You can get this from the **General Information** section for the application you created in step 1.                       |
    | Client secret         | You can get this from the **General Information** section for the application you created in step 1.                       |
    | Bot token             | Get this in the **Bot** section that you used in step 2.                                                                   |
-   | Webhook URL           | You can create it in Discord Channel Settings -> Integrations -> Webhooks                                                  |
    | Guild ID              | This is where the developer mode you enabled in step 4 comes in handy. Right-click your server icon and press **Copy ID**. |
    | Channel ID            | Same deal than the guild ID, but with the channel you created in step 3.                                                   |
    | JSON Web Token secret | Use a password manager to generate a password with ~50 characters, or mash your keyboard.                                  |
@@ -45,10 +44,6 @@ By using OAuth2, it ensures users can't forge or fake appeals.
 
 13. You should be good to go! You might want to test if it works as intended with an alt account, and if you encounter any problems feel free to [create an issue on GitHub](https://github.com/sylveon/discord-ban-appeals/issues/new).
 
-## Using webhooks
-
-When you use the `DISCORD_WEBHOOK_URL`, you don't need to specify the `DISCORD_BOT_TOKEN`, `GUILD_ID`, and `APPEALS_CHANNEL` in the environment variables. The message will be sent using the webhook without an unban button.
-
 ## Blocking users
 
 Users that spam requests can be blocked by creating an environment variable called `BLOCKED_USERS`, which should contain a comma-separated list of quoted user IDs. To do this:
@@ -66,3 +61,17 @@ Users that spam requests can be blocked by creating an environment variable call
    ![](https://i.imgur.com/jNKgS2B.png)
 
 6. Redeploy the site with **Deploys** -> **Trigger deploy** -> **Deploy site**.
+
+## Using webhooks
+
+When you use the `DISCORD_WEBHOOK_URL`, you don't need to specify the `DISCORD_BOT_TOKEN`, `GUILD_ID`, and `APPEALS_CHANNEL` in the environment variables. The message will be sent using the webhook without an unban button. To do this:
+
+1. On your [Netlify dashboard](https://app.netlify.com), click **Deploys** and navigate to **Deploy settings**, and then to the **Environment** option.
+
+2. Under **Environment variables**, click **Edit variables**.
+
+3. Right-click on any channel and click **Edit Channel** -> **Integrations** -> **Webhooks** -> **Copy Webhook URL**.
+
+4. Click **New variable**, and create an environment variable with `DISCORD_WEBHOOK_URL` as its key. For the value, paste the Webhook URL you copied in the previous step.
+
+5. Redeploy the site with **Deploys** -> **Trigger deploy** -> **Deploy site**.

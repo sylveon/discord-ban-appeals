@@ -16,7 +16,6 @@
   DISCORD_CLIENT_ID = "Your Discord App's client ID"
   DISCORD_CLIENT_SECRET = "Your Discord App's client secret"
   DISCORD_BOT_TOKEN = "Your Discord Bot Token"
-  DISCORD_WEBHOOK_URL = "Your Discord Webhook URL"
   GUILD_ID = "ID of the guild this deployment targets"
   APPEALS_CHANNEL = "ID of the channel used for appeal form submission"
   JWT_SECRET = "JSON Web Token secret, mash keyboard plz"
