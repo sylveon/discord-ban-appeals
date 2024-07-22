@@ -47,19 +47,16 @@ async function main() {
 
     if(!process.env.DISCORD_WEBHOOK_URL) {
         // Make sure the bot token & env variables are valid.
-        const headers = {
-            "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+        const init = {
+            method: "GET",
+            headers: {
+                "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+            },
         };
 
         const results = await Promise.all([
-            fetch(`${API_ENDPOINT}/guilds/${process.env.GUILD_ID}/bans?limit=1`, {
-                method: "GET",
-                headers: headers,
-            }),
-           fetch(`${API_ENDPOINT}/channels/${process.env.APPEALS_CHANNEL}`, {
-                method: "GET",
-                headers: headers,
-            }),
+            fetch(`${API_ENDPOINT}/guilds/${process.env.GUILD_ID}/bans?limit=1`, init),
+            fetch(`${API_ENDPOINT}/channels/${process.env.APPEALS_CHANNEL}`, init),
         ]);
 
         results.forEach(result => {
