@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import process from "process";
 import { fileURLToPath } from 'url';
-import {API_ENDPOINT} from "./func/helpers/discord-helpers.js";
+import { API_ENDPOINT } from "./func/helpers/discord-helpers.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
