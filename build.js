@@ -1,8 +1,9 @@
-import Eris from "eris";
+import fetch from 'node-fetch';
 import fs from "fs";
 import path from "path";
 import process from "process";
 import { fileURLToPath } from 'url';
+import {API_ENDPOINT} from "./func/helpers/discord-helpers.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -45,16 +46,28 @@ async function main() {
     }
 
     if(!process.env.DISCORD_WEBHOOK_URL) {
-        // Make sure the bot connected to the gateway at least once.
-        const bot = new Eris(process.env.DISCORD_BOT_TOKEN);
-        bot.on("ready", () => bot.disconnect());
+        // Make sure the bot token & env variables are valid.
+        const headers = {
+            "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+        };
 
-        try {
-            await bot.connect();
-        } catch (e) {
-            console.log(e);
-            process.exit(1);
-        }
+        const results = await Promise.all([
+            fetch(`${API_ENDPOINT}/guilds/${process.env.GUILD_ID}/bans?limit=1`, {
+                method: "GET",
+                headers: headers,
+            }),
+           fetch(`${API_ENDPOINT}/channels/${process.env.APPEALS_CHANNEL}`, {
+                method: "GET",
+                headers: headers,
+            }),
+        ]);
+
+        results.forEach(result => {
+            if(!result.ok) {
+                console.log(result.statusText);
+                process.exit(1);
+            }
+        });
     }
 }
 
