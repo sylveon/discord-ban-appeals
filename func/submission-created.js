@@ -40,8 +40,7 @@ export async function handler(event, context) {
             };
         }
 
-        const isPomelo = userInfo.discriminator === "0";
-        const username = isPomelo ? userInfo.username : `${userInfo.username}#${userInfo.discriminator}`;
+        const username = userInfo.username;
 
         const message = {
             embed: {
