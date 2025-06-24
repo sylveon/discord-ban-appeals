@@ -40,8 +40,6 @@ export async function handler(event, context) {
             };
         }
 
-        const username = userInfo.username;
-
         const message = {
             embed: {
                 title: "New appeal submitted!",
@@ -49,7 +47,7 @@ export async function handler(event, context) {
                 fields: [
                     {
                         name: "Submitter",
-                        value: `<@${userInfo.id}> (${username})`
+                        value: `<@${userInfo.id}> (${userInfo.username})`
                     },
                     {
                         name: "Why were you banned?",
