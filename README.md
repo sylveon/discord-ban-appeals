@@ -92,3 +92,7 @@ When you use the `DISCORD_WEBHOOK_URL`, you don't need to specify the `DISCORD_B
 4. Click **New variable**, and create an environment variable with `DISCORD_WEBHOOK_URL` as its key. For the value, paste the Webhook URL you copied in the previous step.
 
 5. Redeploy the site with **Deploys** -> **Trigger deploy** -> **Deploy site**.
+
+## Custom background image
+
+If you want to use an image as a background, go to `/public/script.js` and put a link to the file (local or on the web) in the `backgroundImageUrl` variable. The background will be applied to each route.

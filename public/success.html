@@ -11,16 +11,27 @@
         <title>Success</title>
     </head>
     <body class="d-flex h-100 justify-content-center align-items-center">
-        <h1 id="msg" style="color: #43b581;" class="text-center">
-            Your appeal has been submitted!<br>
-            Please keep your friend requests open so that a mod can contact you.
-        </h1>
+        <div class="container text-center mb-0 justify-content-center align-items-center">
+            <h1 id="msg" class="text-success"></h1>
+            <p id="description" class="text-center mt-4"></p>
+        </div>
 
         <script>
-            const msg = new URLSearchParams(document.location.search.substring(1)).get("msg");
+            const msg = new URLSearchParams(
+                document.location.search.substring(1)
+            ).get("msg");
+
+            const msgContainer = document.getElementById("msg");
             if (msg) {
-                document.getElementById("msg").innerText = msg;
+                msgContainer.innerText = msg;
+            } else {
+                msgContainer.innerText = "Your appeal has been submitted!";
+                const descriptionContainer = document.getElementById("description");
+                descriptionContainer.innerText =
+                    "Please keep your friend requests open so that a mod can contact you.";
+                descriptionContainer.style.display = "unset";
             }
         </script>
+        <script src="script.js"></script>
     </body>
 </html>
