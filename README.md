@@ -62,6 +62,23 @@ Users that spam requests can be blocked by creating an environment variable call
 
 6. Redeploy the site with **Deploys** -> **Trigger deploy** -> **Deploy site**.
 
+### Discord user block
+
+Users can also be banned by adding `/p` or `/perm` to the Discord ban reason.
+
+## Hiding the ban reason
+
+By default, the ban reason is displayed until `/h` or `/hide` is added to it. To globally disable the ban reason follow the steps below:
+
+1. On your [Netlify dashboard](https://app.netlify.com), click **Deploys** and navigate to **Deploy settings**, and then to the **Environment** option.
+
+2. Under **Environment variables**, click **Edit variables**.
+
+3. Click **New variable**, and create an environment variable with `ALWAYS_HIDE_BAN_REASON` as its key. Use `true` as the value.
+
+4. Redeploy the site with **Deploys** -> **Trigger deploy** -> **Deploy site**.
+
+
 ## Using webhooks
 
 When you use the `DISCORD_WEBHOOK_URL`, you don't need to specify the `DISCORD_BOT_TOKEN`, `GUILD_ID`, and `APPEALS_CHANNEL` in the environment variables. The message will be sent using the webhook without an unban button. To do this:

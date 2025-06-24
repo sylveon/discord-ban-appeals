@@ -61,6 +61,13 @@ export async function handler(event, context) {
                     },
                 };
             }
+
+            const userPublic = {
+                id: user.id,
+                avatar: user.avatar,
+                username: user.username,
+                discriminator: user.discriminator
+            };
     
             if (process.env.GUILD_ID && !process.env.SKIP_BAN_CHECK && !process.env.DISCORD_WEBHOOK_URL) {
                 const ban = await getBan(user.id, process.env.GUILD_ID, process.env.DISCORD_BOT_TOKEN);
@@ -72,15 +79,25 @@ export async function handler(event, context) {
                         }
                     };
                 }
+
+                if (ban.reason) {
+                    if (ban.reason.includes("/p") || ban.reason.includes("/perm")) {
+                        return {
+                            statusCode: 303,
+                            headers: {
+                                "Location": `/error?msg=${encodeURIComponent("You cannot submit ban appeals with this Discord account.")}`,
+                            },
+                        };
+                    }
+
+                    if (!process.env.ALWAYS_HIDE_BAN_REASON) {
+                        if(!ban.reason.includes("/h") && !ban.reason.includes("/hide")) {
+                            userPublic.reason = ban.reason;
+                        }
+                    }
+                }
             }
-    
-            const userPublic = {
-                id: user.id,
-                avatar: user.avatar,
-                username: user.username,
-                discriminator: user.discriminator
-            };
-    
+
             return {
                 statusCode: 303,
                 headers: {
