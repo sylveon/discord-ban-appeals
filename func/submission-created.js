@@ -40,9 +40,6 @@ export async function handler(event, context) {
             };
         }
 
-        const isPomelo = userInfo.discriminator === "0";
-        const username = isPomelo ? userInfo.username : `${userInfo.username}#${userInfo.discriminator}`;
-
         const message = {
             embed: {
                 title: "New appeal submitted!",
@@ -50,7 +47,7 @@ export async function handler(event, context) {
                 fields: [
                     {
                         name: "Submitter",
-                        value: `<@${userInfo.id}> (${username})`
+                        value: `<@${userInfo.id}> (${userInfo.username})`
                     },
                     {
                         name: "Why were you banned?",
