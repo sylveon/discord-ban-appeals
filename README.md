@@ -95,4 +95,4 @@ When you use the `DISCORD_WEBHOOK_URL`, you don't need to specify the `DISCORD_B
 
 ## Custom background image
 
-If you want to use an image as a background, go to `/public/script.js` and put a link to the file (local or on the web) in the `backgroundImageUrl` variable. The background will be applied to each route.
+If you want to use an image as a background, go to `/public/script.js` and put the path to the file located in the public folder in the `backgroundImageUrl` variable. The background will be applied to each route.
