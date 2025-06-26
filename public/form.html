@@ -16,12 +16,18 @@
         </div>
 
         <div class="container mb-3">
-            <div class="d-flex">
-                <img id="avatar" class="rounded-circle" width="64" height="64" alt="Your avatar">
-                <h2 id="username" class="ml-3 mb-0 align-self-center"></h2>
+            <div class="flex-column justify-content-center">
+                <div class="d-flex">
+                    <img id="avatar" class="rounded-circle" width="70" height="70" alt="Your avatar">
+                    <h2 id="username" class="ml-3 mb-0 align-self-center"></h2>
+                </div>
+                <div id="banReasonContainer" class="mt-3">
+                    <b>Ban reason:</b>
+                    <span id="originalBanReason"></span>
+                </div>
             </div>
 
-            <form class="mt-3" method="post" name="appeal" action="/success" netlify>
+            <form class="mt-5" method="post" name="appeal" action="/success" netlify>
                 <input type="hidden" id="token" name="token">
                 <div class="form-group">
                     <label for="banReason">Why were you banned?</label>
@@ -72,6 +78,11 @@
             document.getElementById("avatar").src = `https://cdn.discordapp.com/${avatar}?size=256`;
 
             document.getElementById("username").textContent = userInfo.username;
+
+            if(userInfo.reason) {
+                document.getElementById("banReasonContainer").style.display = "block";
+                document.getElementById("originalBanReason").textContent = userInfo.reason;
+            }
 
             document.getElementById("token").value = jwt;
 
