@@ -2,10 +2,7 @@ import fetch from 'node-fetch';
 import fs from "fs";
 import path from "path";
 import process from "process";
-import { fileURLToPath } from 'url';
 import { API_ENDPOINT } from "./func/helpers/discord-helpers.js";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function assertSuccess(err) {
     if (err) {
@@ -29,7 +26,7 @@ function replaceInFile(file, original, replacement, callback) {
 }
 
 async function main() {
-    const func = path.resolve(__dirname, "func");
+    const func = path.resolve(import.meta.dirname, "func");
 
     const url = process.env.CONTEXT === "production" ? process.env.URL : process.env.DEPLOY_PRIME_URL;
     replaceInFile(path.resolve(func, "oauth.js"), /DEPLOY_PRIME_URL/g, `"${url}"`);
@@ -37,7 +34,7 @@ async function main() {
     replaceInFile(path.resolve(func, "submission-created.js"), "DEPLOY_PRIME_URL", `"${url}"`, () => {
         if (!process.env.USE_NETLIFY_FORMS) {
             fs.rename(path.resolve(func, "submission-created.js"), path.resolve(func, "submit-appeal.js"), assertSuccess);
-            replaceInFile(path.resolve(__dirname, "public", "form.html"), "action=\"/success\" netlify", "action=\"/.netlify/functions/submit-appeal\"");
+            replaceInFile(path.resolve(import.meta.dirname, "public", "form.html"), "action=\"/success\" netlify", "action=\"/.netlify/functions/submit-appeal\"");
         }
     });
 
