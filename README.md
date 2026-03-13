@@ -81,7 +81,7 @@ By default, the ban reason is displayed until `/h` or `/hide` is added to it. To
 
 ## Using webhooks
 
-When you use the `DISCORD_WEBHOOK_URL`, you don't need to specify the `DISCORD_BOT_TOKEN`, `GUILD_ID`, and `APPEALS_CHANNEL` in the environment variables. The message will be sent using the webhook without an unban button. To do this:
+When you use the `DISCORD_WEBHOOK_URL`, you don't need to specify the `DISCORD_BOT_TOKEN`, `GUILD_ID`, and `APPEALS_CHANNEL` in the environment variables. The message will be sent using the webhook without an unban button, the form will not attempt to check if the user is actually banned before letting them appeal, and the permanent ban functionality does not work. To do this:
 
 1. On your [Netlify dashboard](https://app.netlify.com), click **Deploys** and navigate to **Deploy settings**, and then to the **Environment** option.
 
